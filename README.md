@@ -7,7 +7,7 @@ Aim of this application is the generation of 3D boundary conditions for TYCHO fr
 
 To compile the sources you need a C++ compiler (e.g. http://gcc.gnu.org/), the QT library including the qt-devel packages and the libQGLViewer library. Note that QT is available under the open source LGPL version 2.1 license, from the release of Qt 4.5 onward (read more).
 
-(https://github.com/kapferer/tychoBCG3D/blob/master/appscreen.jpg "tycho_BCGG3D")
+![tycho_BCG3D](https://github.com/kapferer/tychoBCG3D/blob/master/appscreen.jpg "tycho_BCGG3D")
 
 To generate tychoBCG3D you need to execute the following steps:
 
