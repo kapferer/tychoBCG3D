@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Unbenanntes Dokument</title>
+<style type="text/css">
+.schrift {
+	font-family: Verdana, Geneva, sans-serif;
+}
+.schrift {
+	font-size: 10px;
+}
+.schrift {
+	font-size: 14px;
+}
+.schrift {
+	font-size: 16px;
+}
+.fett {
+	font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+<p class="schrift">&nbsp;</p>
+<p class="schrift"><span class="schrift"><span class="schrift"><span class="schrift">Welcome to</span></span></span><span class="fett"> tychoBCG3D -</span><span class="schrift"><span class="schrift"><span class="schrift"> TYCHO's 3D boundary condition generator </span></span></span>for 3D simulations</p>
+<hr />
+<p class="schrift"><span class="schrift"><span class="schrift"><span class="schrift">Aim of this application is the generation of TYCHO boundary conditions from point data, such as 3D scans (e.g.kinect) or STL data from CAD applications.</span></span></span> <span class="schrift"><span class="schrift"><span class="schrift">The result is a regular grid with the resolution - res x, res y and res z - in the computational domain with the extent xmax, ymax, ymin, ymax and zmin, zmax.</span></span></span></p>
+<hr />
+<p class="schrift"><span class="schrift"><span class="schrift"><span class="schrift"><strong>A typical workflow could be:</strong></span></span></span></p>
+<p class="schrift"><span class="schrift"><span class="schrift"><span class="schrift">1.)	open STL data</span></span></span> or point data (plain text file with x,y,z and normal vector x,y,z in one datarow)</p>
+<p class="schrift"><span class="schrift"><span class="schrift"><span class="schrift">2.) set the relative size of the computational domain (the physical diameters are then set within a TYCHO simulation); note that tychoBCG3D scales all models to 1</span></span></span></p>
+<p class="schrift"><span class="schrift"><span class="schrift"><span class="schrift">3.) set the resolution</span></span></span></p>
+<p class="schrift"><span class="schrift"><span class="schrift"><span class="schrift">4.) save the boundary for TYCHO</span></span></span></p>
+<p class="schrift"><span class="schrift"><span class="schrift"><span class="schrift">4.a) you can check the sampled data of the boundaries by choosing &quot;sampled data&quot; in the dropdown box in the right part of the MainApp</span></span></span></p>
+<p class="schrift"><span class="schrift"><span class="schrift"><span class="schrift">5.) start tychoGUI and use this boundary in your TYCHO 3D-simulation</span></span></span></p>
+<hr />
+<p class="schrift">The main Window of tychoBCG3D</p>
+<p><img src="appscreen.jpg" alt="tychoBCG3D" width="600" height="452" />
+</p>
+<p class="schrift">The main menu bar</p>
+<p><img src="meu.jpg" alt="Menu" width="456" height="43" /></p>
+<p class="schrift">1 Open point data (just ascii files with x,y,z coordiantes and normal_x, normal_y, normal_z components in one row with space as delimiter, e.g. 1.0 1.0 1.0 1.0 0.0 0.0)
+  <br />
+  2 Open STL data(binary or ascii)<br />
+  3 Reset computational domain to the size of the boundary<br />
+  4 Save TYCHO boundary condition<br />
+  5 Solid Color<br />
+  6 Ambient Color<br />
+  7 Backround Color
+  <br />
+  8 Calculate Normal Vectors (if somehow corrupted by the CAD software)<br />
+  9 Help<br />
+  10 About tychoBCG3D<br />
+  11 Exit</p>
+<hr />
+<p class="schrift"><strong>New:</strong> You can save soundemitter files for noise simulations in TYCHO. A soundemitter file is basically the same as a boundary-condition file, but is treated as a sound source within a TYCHO simulation with special properties set-up in the parameter file.</p>
+<p class="schrift">Have fun using TYCHO</p>
+<p class="schrift">Wolfgang Kapferer</p>
+</body>
+</html>

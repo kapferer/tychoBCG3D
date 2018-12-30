@@ -1,0 +1,243 @@
+64d63
+<     connect(ui->actionSave_Soundemitter, SIGNAL(triggered()), this, SLOT(on_actionMake_Soundemitter_triggered()));
+243c242
+<     char buffer[5];
+---
+>     char buffer[50];
+271a271
+>     //buffer .clear();
+302c302
+<         qDebug() << bin_or_string << tmp;
+---
+>         qDebug() << bin_or_string;
+360,361d359
+<                     qDebug() << counter;
+< 
+568,794d565
+<         QFileInfo file(file_save);
+< 
+<         if (!file_save.isEmpty()){
+< 
+<             if(file.suffix().isEmpty()) file_save += ".tyc";
+< 
+<             float sx, sy, sz;
+<             int ZAX, ZAY, ZAZ;
+<             int i, j, k, l;
+<             int tmp;
+<             int counter;
+< 
+<             float vertex1[3];
+<             float vertex2[3];
+<             float vertex3[3];
+< 
+<             //upper limits and values for running indices for the sample algol for stl data
+<             int nu, nw;
+<             int max_u, max_w, max_uw;
+<             int max_ax, max_ay, max_az;
+<             int max_bx, max_by, max_bz;
+< 
+<             //triangle distance-vectors
+<             float ux, uy, uz;
+<             float wx, wy, wz;
+< 
+<             //point on triangle
+<             float px, py, pz;
+< 
+<             ZAX = ui->res_x->value();
+<             ZAY = ui->res_y->value();
+<             ZAZ = ui->res_z->value();
+< 
+< 
+<             ui->glwidget->x_min = ui->edit_xmin->value();
+<             ui->glwidget->y_min = ui->edit_ymin->value();
+<             ui->glwidget->z_min = ui->edit_zmin->value();
+<             ui->glwidget->x_max = ui->edit_xmax->value();
+<             ui->glwidget->y_max = ui->edit_ymax->value();
+<             ui->glwidget->z_max = ui->edit_zmax->value();
+< 
+<             diameter_x = ui->glwidget->x_max - ui->glwidget->x_min;
+<             diameter_y = ui->glwidget->y_max - ui->glwidget->y_min;
+<             diameter_z = ui->glwidget->z_max - ui->glwidget->z_min;
+< 
+<             sx = (diameter_x/(float)ZAX);
+<             sy = (diameter_y/(float)ZAY);
+<             sz = (diameter_z/(float)ZAZ);
+< 
+<             bounding = (int ***)calloc((size_t)ZAX, sizeof(int **));
+<             for (k = 0; k < ZAX; k++) {
+<                 bounding[k] = (int **)calloc((size_t)ZAY, sizeof(int *));
+<                 if ( !bounding[k] ) {
+<                     fprintf(stderr, "Could not allocate memory.\n");
+<                     exit(1);
+<                 }
+<                 for (j = 0; j < ZAY; j++) {
+<                     bounding[k][j] = (int *)calloc((size_t)ZAZ, sizeof(int));
+<                     if ( !bounding[k][j] ) {
+<                         fprintf(stderr, "Could not allocate memory.\n");
+<                         exit(1);
+<                     }
+<                 }
+<             }
+< 
+<             //Point Data sampled on a grid
+<             if (ui->glwidget->coordiantes[0].size() > 0){
+< 
+<                 ui->progressBar->setHidden(false);
+<                 ui->progressBar->setValue(0);
+< 
+<                 counter = 0;
+< 
+<                 for (l = 0; l < ui->glwidget->coordiantes[0].size(); l++)   // Für jedes Partikel
+<                 {
+< 
+<                     ui->glwidget->coordiantes[0][l] += -(ui->glwidget->x_min);
+<                     ui->glwidget->coordiantes[1][l] += -(ui->glwidget->y_min);
+<                     ui->glwidget->coordiantes[2][l] += -(ui->glwidget->z_min);
+< 
+<                     i = (int)(floor(((ui->glwidget->coordiantes[0][l])/sx)));//Mit floor werden alle Partikel einer Zelle zugeordnet.Es werden also alle Partikel im selben sx der selben Zelle zugeordnet
+<                     j = (int)(floor(((ui->glwidget->coordiantes[1][l])/sy)));//Der nächste Gitterpunkt wird bestimmt. Mit -175 in x und y Koordinatentransformation, um Würfel ins Zentrum zu setzen.
+<                     k = (int)(floor(((ui->glwidget->coordiantes[2][l])/sz)));
+< 
+<                     if ((i < 0)||(j < 0)||(k < 0)||(i > ZAX - 1)||(j > ZAY - 1)||(k > ZAZ - 1)) {
+< 
+<                         ui->glwidget->coordiantes[0][l] += ui->glwidget->x_min;
+<                         ui->glwidget->coordiantes[1][l] += ui->glwidget->y_min;
+<                         ui->glwidget->coordiantes[2][l] += ui->glwidget->z_min;
+< 
+<                         continue;
+<                     }
+< 
+<                     bounding[i][j][k] += 1;
+< 
+<                     ui->glwidget->coordiantes[0][l] += ui->glwidget->x_min;
+<                     ui->glwidget->coordiantes[1][l] += ui->glwidget->y_min;
+<                     ui->glwidget->coordiantes[2][l] += ui->glwidget->z_min;
+< 
+<                     counter++;
+< 
+<                     ui->progressBar->setValue(100.0/ui->glwidget->coordiantes[0].size()*counter);
+< 
+<                 }
+< 
+<                 ui->progressBar->setHidden(true);
+<             }
+< 
+< 
+<             //STL Data sampled on a grid
+<             if (ui->glwidget->stl_data[0].size() > 0){
+< 
+<                 ui->progressBar->setHidden(false);
+<                 ui->progressBar->setValue(0);
+< 
+<                 counter = 0;
+< 
+<                 // for each triangle (remember first the norm vector, then the 3 vertices
+<                 for (l = 0; l <= ui->glwidget->stl_data[0].size() - 4; l = l + 4)
+<                 {
+< 
+<                     //just to be sure
+<                     vertex1[0] = ui->glwidget->stl_data[0].at(l+1)-(ui->glwidget->x_min);
+<                     vertex1[1] = ui->glwidget->stl_data[1].at(l+1)-(ui->glwidget->y_min);
+<                     vertex1[2] = ui->glwidget->stl_data[2].at(l+1)-(ui->glwidget->z_min);
+<                     vertex2[0] = ui->glwidget->stl_data[0].at(l+2)-(ui->glwidget->x_min);
+<                     vertex2[1] = ui->glwidget->stl_data[1].at(l+2)-(ui->glwidget->y_min);
+<                     vertex2[2] = ui->glwidget->stl_data[2].at(l+2)-(ui->glwidget->z_min);
+<                     vertex3[0] = ui->glwidget->stl_data[0].at(l+3)-(ui->glwidget->x_min);
+<                     vertex3[1] = ui->glwidget->stl_data[1].at(l+3)-(ui->glwidget->y_min);
+<                     vertex3[2] = ui->glwidget->stl_data[2].at(l+3)-(ui->glwidget->z_min);
+< 
+<                     ux = vertex2[0] - vertex1[0];
+<                     uy = vertex2[1] - vertex1[1];
+<                     uz = vertex2[2] - vertex1[2];
+< 
+<                     wx = vertex3[0] - vertex1[0];
+<                     wy = vertex3[1] - vertex1[1];
+<                     wz = vertex3[2] - vertex1[2];
+< 
+<                     max_ax = ceil(fabs(ux/sx));
+<                     max_ay = ceil(fabs(uy/sy));
+<                     max_az = ceil(fabs(uz/sz));
+< 
+<                     max_u = max_ax + max_ay + max_az;
+< 
+<                     max_bx = ceil(fabs(wx/sx));
+<                     max_by = ceil(fabs(wy/sy));
+<                     max_bz = ceil(fabs(wz/sz));
+< 
+<                     max_w = max_bx + max_by + max_bz;
+<                     max_uw = max_u + max_w;
+< 
+<                     for (nu = 0; nu <= max_uw; nu++){
+<                         for (nw = 0; nw <= max_uw - nu; nw++){
+< 
+<                             px = vertex1[0] + ((1.0 * nu)/max_uw) * ux + ((1.0 * nw)/max_uw) * wx;
+<                             py = vertex1[1] + ((1.0 * nu)/max_uw) * uy + ((1.0 * nw)/max_uw) * wy;
+<                             pz = vertex1[2] + ((1.0 * nu)/max_uw) * uz + ((1.0 * nw)/max_uw) * wz;
+< 
+<                             i = (int)(floor((px/sx)));
+<                             j = (int)(floor((py/sy)));
+<                             k = (int)(floor((pz/sz)));
+< 
+<                             if ((i < 0)||(j < 0)||(k < 0)||(i > ZAX - 1)||(j > ZAY - 1)||(k > ZAZ - 1)) continue;
+< 
+<                             bounding[i][j][k] = 1;
+<                         }
+<                     }
+< 
+<                     counter = counter + 4;
+< 
+<                     ui->progressBar->setValue(100.0/ui->glwidget->stl_data[0].size()*counter);
+<                 }
+< 
+<                 ui->progressBar->setHidden(true);
+<             }
+< 
+<             //here the TYCHO boundary file is written
+<             fd = fopen(file_save.toUtf8(), "w");
+<             fprintf(fd,"This is a TYCHO boundary condition file.\n");
+<             fprintf(fd,"X %i\n", ZAX);
+<             fprintf(fd,"Y %i\n", ZAY);
+<             fprintf(fd,"Z %i\n", ZAZ);
+<             fseek(fd, 200, SEEK_SET);
+< 
+<             for (int i = 0; i < ZAX; i++) {
+<                 for (int j = 0; j < ZAY; j++) {
+<                     for (int k = 0; k < ZAZ; k++) {
+< 
+<                         tmp = 0;
+<                         if (bounding[i][j][k] > 0) tmp = 1;
+<                         fwrite(&tmp, 1, sizeof (int), fd);
+<                     }
+<                 }
+<             }
+< 
+<             draw_sampled_data(ZAX, ZAY, ZAZ, bounding);
+< 
+<             free(bounding);
+< 
+<             fclose(fd);
+< 
+<         }
+<     }
+< }
+< 
+< /**
+<  * Samples the triangles or point data to the grid
+<  *
+<  * @brief MainWindow::on_actionMake_Boundary_Conditions_triggered
+<  */
+< void MainWindow::on_actionMake_Soundemitter_triggered()
+< {
+< 
+<     if ((ui->glwidget->stl_data[0].size()==0)&&(ui->glwidget->coordiantes[0].size()==0)){
+< 
+<         QMessageBox msgBox;
+<         msgBox.setText("Please load first some data.");
+<         msgBox.exec();
+<     }
+< 
+<     if ((ui->glwidget->stl_data[0].size()!=0)||(ui->glwidget->coordiantes[0].size()!=0)){
+< 
+<         FILE *fd;
+<         QString file_save;
+<         file_save = QFileDialog::getSaveFileName(this, tr("TYCHO soundemitter"),"",tr("Tycho Soundemitter File (*.tyc)"));

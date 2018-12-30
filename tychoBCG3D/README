@@ -1,0 +1,19 @@
+This is tychoBCG3D v0.2 a 3D boundary condition generator for the simulation package TYCHO.
+
+This software is free and Open Source. Keep in mind that this code does not come with any guarantee. 
+You will find all sources in the sources-directory in your installation-directory.   
+More information about TYCHO can be found at http://www.tycho-cfd.at 
+
+tychoBCG3D uses libQGLViewer 
+The QGLViewer library is Copyright (C) 2002-2008 Gilles Debunne.
+
+http://www.libqglviewer.com/
+
+If you want to compile this sources you need the libQGLViewer library.
+
+The ICONS are taken from the Open Icon Library.
+
+Have fun using TYCHO
+
+Wolfgang Kapferer
+(October 2013)
