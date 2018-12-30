@@ -7,7 +7,7 @@ The present version V0.1 is the first release.
 
 Aim of this application is the generation of 3D boundary conditions for TYCHO from STL- and point data (e.g. 3D scans). You are welcome to download it and do whatever you want with it. Keep in mind that this code does not come with any guarantee.
 
-To compile the sources you need a C++ compiler (e.g. http://gcc.gnu.org/), the QT library including the qt-devel packages and the libQGLViewer library. Note that QT is available under the open source LGPL version 2.1 license, from the release of Qt 4.5 onward (read more).
+To compile the sources you need a C++ compiler (e.g. http://gcc.gnu.org/), the QT library including the qt-devel packages and the libQGLViewer library. Note that QT is available under the open source LGPL version 2.1 license, from the release of Qt 4.5 onward (http://doc.qt.io/qt-5/opensourcelicense.html).
 
 ![tycho_BCG3D](https://github.com/kapferer/tychoBCG3D/blob/master/appscreen.jpg "tycho_BCGG3D")
 
