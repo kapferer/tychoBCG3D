@@ -1,3 +1,5 @@
+## tychoBCG3D
+
 Welcome to tychoBCG3D (TYCHO Boundary Conditions Generator for 3D STL- and point data (e.g. 3D scans), which you can download here. 
 It is written in C++ with the Qt framework and the libQGLViewer library
 
@@ -14,7 +16,7 @@ To generate tychoBCG3D you need to execute the following steps:
 qmake-qt4
 make
 
- A typical workflow could be:
+ # A typical workflow could be
 
 1.) open STL data or point data (plain text file with x,y,z and normal vector x,y,z in one datarow)
 
